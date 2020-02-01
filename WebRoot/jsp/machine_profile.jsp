@@ -1,0 +1,846 @@
+<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="util.ConnectDatabase"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.ResultSet"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"><head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<title>Wifinity, Intelligent Enterprise  Management</title>
+<META HTTP-EQUIV="CONTENT-LANGUAGE" CONTENT="EN"/>
+<meta name="revisit-after" content="10 days" /> 
+<meta name="robots" content="all" /> 
+<meta name="audience" content="all" /> 
+<meta name="author" content="Wifinity" /> 
+<meta name="company" content="Wifinity Technology" /> 
+<meta name="copyright" content="2010, Wifinity Technology " /> 
+<meta name="publisher" content=" Wifinity " /> 
+<meta name="distribution" content="global" /> 
+<meta name="reply-to" content=" info@wifinitytech.com " /> 
+<meta name="language" content="english" /> 
+<meta name="content-language" content="en" />
+<meta name="keywords" content="RFID, Wifinity, Wifinity, Wifinity technology, technologies, technology, wireless sensors, energy management, security management, power managment" />
+<link rel="shortcut icon" href="../images/favicon.ico" />
+<script type="text/javascript" src="Scripts/unitpngfix.js"></script> 
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/layout.css" rel="stylesheet" type="text/css" /> 
+<link href="css/setting.css" rel="stylesheet" type="text/css" /> 
+<script src="Scripts/maxheight.js" type="text/javascript"></script> 
+<link rel="stylesheet" type="text/css" href="menu/ddlevelsmenu-base.css" />
+<script type="text/javascript" src="Scripts/popup.js"></script>
+        <script type="text/javascript" src="Scripts/content.js"></script>
+<script language="javascript">
+	
+		function submit_form()
+		{
+		document.forms["myform"].submit();
+		}
+		function getid(obj) {
+		document.getElementById('myframe').src='add_machine_profile.jsp?id='+obj.value;
+		//alert(obj.value);
+		}
+	function displaypolicy(obj) {
+	
+txt = obj.options[obj.selectedIndex].value;
+
+//document.getElementById("approve").style.display = '';
+//document.getElementById("edit").style.display = '';
+if (txt !='') {
+document.getElementById("type").value=document.getElementById("room_type").value ;
+document.getElementById("room_type").disabled=true ;
+
+document.getElementById("tabs-3").style.display = '';
+} }</script>
+		
+<!--[if gte IE 5]>
+<style type="text/css">
+
+.white {
+background:repeat-x scroll left bottom #FFFFFF;
+filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/grey-up.png' ,sizingMethod='scale');
+}
+.white2 {
+background:repeat-x scroll left bottom #CDD6DD;
+filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/grey-up.png' ,sizingMethod='scale');
+}
+</style>
+<![endif]-->	
+
+<script language="javascript"> 
+function fnclear(obj,val){
+if(obj.value==val){
+obj.value='';}
+else if(obj.value=='') {obj.value=val;}
+}</script> 
+<script type="text/javascript" src="menu/ddlevelsmenu.js"> </script> 
+
+<style type="text/css"> 
+<!--
+.Estilo1 {
+	font-size: 11px;
+	font-weight: bold;
+}
+-->
+</style> 
+<script src="Scripts/AC_RunActiveContent.js" type="text/javascript"></script> 
+
+
+
+
+<script type="text/javascript" src="menu/ddlevelsmenu.js"> </script> 
+
+
+        <!-- Load scripts -->
+		<script language="javascript">
+	
+		function submit_form()
+		{
+		document.forms["myform"].submit();
+		}
+		function getid(obj) {
+		document.getElementById("sensor_delete").value=obj.value;
+		document.getElementById('edit_sensor_frame').src='edit_sensor_profile.jsp?machine_id=<%out.print(request.getParameter( "mid" ));%>&sensor_id='+obj.value;
+		//alert(obj.value);
+		}
+		function getCheckedRadios()
+		{
+		var r=confirm("Are you sure ? you want to delete this Zone and its all records. ");
+if (r==true)
+  {
+  return true;
+  }
+else
+  {
+ return false;
+  }
+		
+		}
+		
+		
+		function del_sensor()
+		{
+		var r=confirm("Are you sure ? you want to delete this sensor and its all records. ");
+if (r==true)
+  {
+  return true;
+  }
+else
+  {
+ return false;
+  }
+		//alert("Are you sure ? you want to delete this machine and its all records. ");
+		//return true;
+		}
+	function displaypolicy(obj) {
+	
+txt = obj.options[obj.selectedIndex].value;
+
+//document.getElementById("approve").style.display = '';
+//document.getElementById("edit").style.display = '';
+if (txt !='') {
+document.getElementById("type").value=document.getElementById("room_type").value ;
+document.getElementById("room_type").disabled=true ;
+
+document.getElementById("tabs-3").style.display = '';
+} }</script>
+		
+
+		
+<!--[if gte IE 5]>
+<style type="text/css">
+
+.white {
+background:repeat-x scroll left bottom #FFFFFF;
+filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/grey-up.png' ,sizingMethod='scale');
+}
+.white2 {
+background:repeat-x scroll left bottom #CDD6DD;
+filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/grey-up.png' ,sizingMethod='scale');
+}
+</style>
+<![endif]-->
+</head> 
+ 
+<body id="index" onload="new ElementMaxHeight()"; oncontextmenu="return false;" ondragstart = "return false;" onselectstart = "return false;"> 
+<%
+				String machine_location="";
+	
+					String test=(String)session.getAttribute("user_email");
+					//request.getParameter( "mid" );
+					//System.out.println(request.getParameter( "mid" ));
+					//System.out.println(test);
+                    if(test !=null){
+					
+					}else
+					{
+					response.sendRedirect("login.jsp");
+					
+					}
+    %>
+	<div id="header_tall"> 
+		<div id="main"> 
+			<!--header --> 
+			<div id="header"> 
+				<div class="h_logo"> 
+						<div class="left"> 
+						<a href="index.html"><img alt="" src="images/logo.jpg" /></a>
+					</div> 
+					<div style="float: right;"><span style=" margin-left: 210px;padding-top: 15px;color: #484848;font-size: 30px;float: right;padding-top: 55px;">Power Manager</span></div>
+					
+
+			            <div class="clear"></div> 
+			  </div> 
+  <div id="menu"> 
+					 
+						<div class="leftbg"> 
+                        <div class="rightbg">
+							<div class="padding"> 
+                            <div id="ddtopmenubar" class="mattblackmenu" >
+								<ul> 
+									<li><a href="admin.jsp">Admin</a></li> 
+									<li><a href="addmachine.jsp">Add Zone</a></li> 
+									<li><a href="view_machine_list.jsp"><span>View Zone</span></a></li> 
+									
+									<li><a href="live_dashboard.jsp" >Live Dashboard</a></li> 
+									<li><a href="#" rel="ddsubmenu3">H.E.M.</a></li>
+									 
+								<li><a  href="logout.jsp">Logout</a></li> 
+									
+								</ul> 
+
+                                 <br class="clear" /> <br class="clear" /> 
+                              </div>
+                              
+                              
+                                                       
+ 					 <ul id="ddsubmenu3" class="ddsubmenustyle"> 
+                            		<li><a href="ApplianceDropDown.jsp">Appliance Profile</a></li>
+                               		<li><a href="createProfile.jsp">Load Evaluation Form</a></li>
+                               		<li><a href="EnergyCoastEfficiancy.jsp">Energy Cost Template</a></li>
+                               		<li><a href="EnergyCalculator.jsp">Energy Calculator</a></li>
+                    </ul> 
+                   
+<script type="text/javascript"> 
+ddlevelsmenu.setup("ddtopmenubar", "topbar") //ddlevelsmenu.setup("mainmenuid", "topbar|sidebar")
+</script> 
+							</div> </div>
+					   
+					</div> 
+				</div> 
+               
+
+				<div class="content" style="display: none;"> 
+					<br /> 
+					<br /> 
+				  <div class="text">
+				    <p><br />
+				      <br /><br /><br /><br /><br /><br /><br /><br /><br />
+				    </p>
+				    <p>&nbsp;</p>
+<p>&nbsp;</p>
+				    <p>&nbsp;</p>
+				  </div> 
+
+			      <p>&nbsp;</p>
+</div> 
+    </div> 
+			<!--header end--> 
+			<div id="middle"> 
+				<div class="indent"> 
+					<div class="columns1">
+					  <div class="clear"></div> 
+					</div> 
+					<div class="columns2"> 
+						<div class="ver_line"> 
+							<div class="column1"> 
+								<div class="padding">
+								<div class="pageHead">
+						<h1>
+							Detail View
+						</h1>
+                     <ul class="bread-crmb">
+						<li>
+							Welcome
+							<span class="username">&nbsp;<%
+					String name=(String)session.getAttribute("username");
+					//System.out.println(name);
+                    if(name !=null){
+					out.print(name);
+					}
+    %></span><a class="li_alink"></a>
+						</li>
+						
+
+					</ul>
+					</div>
+                             <div id="main">
+        	
+           
+            
+
+			<div class="main_box">
+			
+					
+					<table style="width:680px;">
+					<tr><td style="height: 10px;color:red" colspan="2" align="center">
+			
+			
+			</td></tr>
+					
+		<% 			 Connection connection1=ConnectDatabase.getConnection();
+    
+          
+         
+    String qu1="select * from sensor_master where  machine_id='"+request.getParameter( "mid" )+"' and status =0 ";
+    Statement stm_n=connection1.createStatement();
+   
+    ResultSet d_1=stm_n.executeQuery(qu1);
+     if(d_1.next())
+       {%>
+			
+			<% 
+   
+    //response.sendRedirect("registration.jsp");
+   
+     }else{
+     %>
+			<div id="warning" style="text-align:center;color:red;padding-top:10px;">
+			This machine have no sensor, Please add at least one sensor to make this a valid  machine .
+			</div>
+			<% 
+     
+     
+     }
+ %>
+					<tr><td>
+					
+					<div id="tabs-3" style="width:680px;">
+
+  
+  
+  
+  <form method="post" name="" action="">	
+  
+  <%
+  String buttonvalue=request.getParameter("setdelete");
+  //System.out.println(buttonvalue);
+  String mid=request.getParameter("mid");
+  
+   int x=0;
+ if(  buttonvalue==null)
+ {
+ buttonvalue="0";
+ }
+   
+ if(buttonvalue.equals("1") )
+ {
+    try
+    
+    {
+    
+    Connection connection=ConnectDatabase.getConnection();
+   
+  
+   
+    Statement stm=connection.createStatement();
+    
+  
+  String quString="update machine_master set status=1 where machine_id='"+mid+"' ";
+ System.out.println(quString); 
+  //System.out.println("test document"+list[i]+"second value" +list[i+1]+"3rd value" +list[i+2]+"4th value" +list[i+3]+"5th value" +list[i+4]+"6th value" +list[i+5]);
+  x= stm.executeUpdate(quString);
+ // System.out.println(x);
+ String query="update sensor_master set status=1  where machine_id='"+mid+"' ";
+ System.out.println(query); 
+  //System.out.println("test document"+list[i]+"second value" +list[i+1]+"3rd value" +list[i+2]+"4th value" +list[i+3]+"5th value" +list[i+4]+"6th value" +list[i+5]);
+ stm.executeUpdate(query);
+   
+  
+  if(x==1)
+    {
+    
+    
+    response.sendRedirect("view_machine_list.jsp");
+    }
+    
+    
+    else{
+     
+    }
+  
+   }
+    catch(Exception e)
+    {
+     response.sendRedirect("registration.jsp");
+    e.printStackTrace();
+   }
+  }
+  
+  
+  
+   %>
+  
+  
+  
+  
+  
+   
+<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+<tr>
+    <td class="gridtd"><div style="max-height: 250px;overflow: auto">
+      <table  width="100%" border="0" cellspacing="1" cellpadding="4">
+    <tr>
+       
+		<td class="white2"><b>Zone Name</b></td>
+	<!--  	<td class="white2" id=""  ><b>Model</b></td>
+	<td class="white2" id=""  ><b>Specification</b></td>
+		<td class="white2" id=""  ><b>Min.Output</b></td>
+	-->
+		<td class="white2" id=""  ><b>Description</b></td>
+		
+		<td class="white2" id=""  ><b>Max.Consumption</b></td>
+		<td class="white2" id=""  ><b>Location</b></td>
+        
+    </tr>
+   
+    <%
+  int a = 1;
+    
+    try
+    
+    {
+    Connection connection=ConnectDatabase.getConnection();
+    
+          
+         
+    String quString1="select * from machine_master where  machine_id='"+request.getParameter( "mid" )+"' and machine_status=0 ";
+    Statement stm1=connection.createStatement();
+   
+    ResultSet d=stm1.executeQuery(quString1);
+     while (d.next()) {
+ 
+     int machine_id =d.getInt(1);
+     String machine_name=d.getString(2);
+      machine_location=d.getString(3);
+     String machine_model=d.getString(4);
+     String machine_description=d.getString(5);
+     String machine_specification=d.getString(6);
+     String machine_min_output=d.getString(7);
+     String machine_max_output=d.getString(8);
+     int aInt = machine_id;
+     
+     
+      String quString2="select * from machine_location_master where location_id='"+machine_location+"' and status=0 ";
+  
+     Statement stm2=connection.createStatement();
+   
+     ResultSet d2=stm2.executeQuery(quString2);
+       if(d2.next())
+       {
+         String location=d2.getString(2);
+     
+     
+   //   System.out.println("aInt document"+ aInt);
+    if(aInt >0)
+    {
+   %> <tr id="<%out.print(a);%>row">
+        
+   <td  class="white" classname="white"><a id="m_name1" href="machine_profile.jsp?mid=<%out.print(machine_id);%>"><%out.print(machine_name);%></a>
+   </td>
+   <!-- <td id="model" class="white" classname="white"><%out.print(machine_model);%>
+   </td> 
+   <td id="specification" class="white" classname="white"><%out.print(machine_specification);%>
+  </td>
+   <td id="min_op" class="white" classname="white"><%out.print(machine_min_output);%>
+   </td> -->
+   <td id="description" class="white" classname="white"><%out.print(machine_description);%>
+   </td>
+   
+   <td id="max_op" class="white" classname="white"><%out.print(machine_max_output);%>
+  </td>
+   <td id="machine_location" class="white" classname="white"><%out.print(location);%>
+   </td>
+   </tr>
+   <% 
+   
+    //response.sendRedirect("registration.jsp");
+   
+     }}
+    a++;  
+    }
+
+
+
+    
+   
+    
+    
+   }
+    catch(Exception e)
+    {
+    e.printStackTrace();
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+     %>
+    
+   
+    
+    
+    
+
+    </table>
+    </div>
+    </td>
+</tr>
+<tr>
+  <!-- <input type="button" value="" onclick="javascript:parent.content.Popup.showModal('modal2',null,null,{'screenColor':'#000000','screenOpacity':.6});return false;" id="lnkForgot"
+ class="add_buttons" /> -->
+  <td align="right" colspan="2" class="form2"> <input type="button" value="" onclick="Popup.showModal('modal2',null,null,{'screenColor':'#000000','screenOpacity':.6});return false;" name="button"
+ class="edit_buttons" />&nbsp;&nbsp;&nbsp;<input type="submit" value="" class="del_buttons"  name="delbutton" onclick="return getCheckedRadios();"  />
+</td><td><input type="hidden" value="1" name="setdelete"/></td>
+  </tr>
+</table>
+</form>
+
+<form method="post" name="" action="">	
+ <%
+  String sensor_delete=request.getParameter("sensor_delete");
+  //System.out.println(buttonvalue);
+  //String mid=request.getParameter("mid");
+  
+   int y=0;
+ if(  sensor_delete==null)
+ {
+ sensor_delete="0";
+ }else
+ {
+    try
+    
+    {
+    
+    Connection connection=ConnectDatabase.getConnection();
+   
+  
+   
+    Statement stm=connection.createStatement();
+    
+  
+  String quString="update sensor_master set status=1  where sensor_id='"+sensor_delete+"' ";
+ System.out.println(quString); 
+  //System.out.println("test document"+list[i]+"second value" +list[i+1]+"3rd value" +list[i+2]+"4th value" +list[i+3]+"5th value" +list[i+4]+"6th value" +list[i+5]);
+  y= stm.executeUpdate(quString);
+ // System.out.println(x);
+   
+  
+  if(y==1)
+    {
+    
+    
+    //response.sendRedirect("view_machine_list.jsp");
+    }
+    
+    
+    else{
+     
+    }
+  
+   }
+    catch(Exception e)
+    {
+     response.sendRedirect("registration.jsp");
+    e.printStackTrace();
+   }
+  }
+  
+  
+  
+   %>
+  
+
+
+
+
+
+
+<table width="100%"  border="0" cellspacing="0" cellpadding="0" id="dd" style="display: none;">
+<tr>
+    <td class="gridtd"><div style="max-height: 100px;overflow: auto">
+      <table  width="100%" border="0" cellspacing="1" cellpadding="4">
+    <tr>
+         <td class="white2" style="width:55px;"><b>Select</b></td>
+		<td class="white2"><b>Appliances Name</b></td>
+		<td class="white2" id=""  ><b>Type</b></td>
+        
+    </tr>
+   
+    <%
+  int at = 1;
+    
+    try
+    
+    {
+    Connection connection=ConnectDatabase.getConnection();
+    
+          
+         
+    String quString1="select * from sensor_master where  machine_id='"+request.getParameter( "mid" )+"' and status=0  ";
+    Statement stm1=connection.createStatement();
+   
+    ResultSet d=stm1.executeQuery(quString1);
+     while (d.next()) {
+
+     int sensor_id =d.getInt(1);
+     String sensor_type_id=d.getString(2);
+     String sensor_name=d.getString(3);
+     String machine_id=d.getString(4);
+    
+     int aInt = sensor_id;   
+        String quString2="select * from sensor_type where sensor_type_id='"+sensor_type_id+"' and status=0 ";
+  
+     Statement stm2=connection.createStatement();
+   
+     ResultSet d2=stm2.executeQuery(quString2);
+       if(d2.next())
+       {
+         String location=d2.getString(2);
+    
+     
+   //   System.out.println("aInt document"+ aInt);
+    if(aInt >0)
+    {
+   %> 
+   <script type="text/javascript"> document.getElementById("dd").style.display = ''; </script>
+   <tr id="<%out.print(a);%>row">
+   <td id="" classname="white" class="white">
+   <input type="radio" onclick="getid(this);" name="chk" id="chk" value="<%out.print(sensor_id);%>"/></td>
+   <td id="" class="white" classname="white"><a href="machine_profile.jsp?mid=<%out.print(machine_id);%>"><%out.print(sensor_name);%></a>
+   </td>
+   <td id="" class="white" classname="white"><%out.print(location);%>
+   </td>
+  
+   </tr>
+   <% 
+   
+    //response.sendRedirect("registration.jsp");
+   
+    } }
+    a++;  
+    }
+
+
+
+    
+   
+    
+    
+   }
+    catch(Exception e)
+    {
+    e.printStackTrace();
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+     %>
+    
+   
+    
+    
+    
+
+    </table>
+    </div>
+    </td>
+</tr>
+<tr>
+  <!-- <input type="button" value="" onclick="javascript:parent.content.Popup.showModal('modal2',null,null,{'screenColor':'#000000','screenOpacity':.6});return false;" id="lnkForgot"
+ class="add_buttons" /> -->
+  <td align="right" colspan="2" class="form2"> <input type="button" value="" onclick="Popup.showModal('modal',null,null,{'screenColor':'#000000','screenOpacity':.6});return false;" id="lnkForgot"
+ class="add_buttons" />&nbsp;&nbsp;&nbsp;<input type="button" value="" onclick="Popup.showModal('modal3',null,null,{'screenColor':'#000000','screenOpacity':.6});return false;" id="lnkForgot"
+ class="edit_buttons" />&nbsp;&nbsp;&nbsp;<input type="submit" value="" class="del_buttons" onclick="return del_sensor();"  />
+ <input type="hidden" value="0" name="sensor_delete" id="sensor_delete"/>
+</td><td></td>
+  </tr>
+</table> 
+</form>
+<form method="post" name="myform" action="addsensor_value.jsp">
+
+					<table style="width:640px;display:none;" id="sensor_table">
+					
+					<tr><td>
+					
+					<div id="" style="width:680px;">
+
+  <input type="hidden" name="m_id" value="<%out.print(request.getParameter( "mid" ));%>" />	 
+  <input type="hidden" name="l_id" value="<%out.print(machine_location);%>" />	 
+<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+<tr>
+    <td class="gridtd"><div style="max-height: 150px;overflow: auto">
+      <table id="table1" width="100%" border="0" cellspacing="1" cellpadding="4">
+    <tr>
+        <td class="white2" style="width:55px;"><b>Select</b></td>
+		<td class="white2"><b>Appliance Name</b></td>
+		<td class="white2" id=""  ><b>Type</b></td>
+		
+        
+    </tr>
+   
+    
+     <tr id="row1" style="display:none;">
+        <td ></td>
+		<td ></td>
+		<td ></td>
+		
+		
+		</tr>
+    
+
+    </table>
+    </div>
+    </td>
+</tr>
+<tr>
+  <!-- <input type="button" value="" onclick="javascript:parent.content.Popup.showModal('modal2',null,null,{'screenColor':'#000000','screenOpacity':.6});return false;" id="lnkForgot"
+ class="add_buttons" /> -->
+  <td align="right" colspan="2" class="form2"> <input type="button" value="" onclick="Popup.showModal('modal',null,null,{'screenColor':'#000000','screenOpacity':.6});return false;" id="lnkForgot"
+ class="add_buttons" />&nbsp;&nbsp;&nbsp;<input type="button" value="" class="del_buttons" onclick="getCheckedRadios();return false;"  />
+</td><td></td>
+  </tr>
+</table>
+<div align="center"><p style="margin-top: 20px;" class="reply" >
+					<a  onclick="javascript:submit_form();" style="text-align: center;" title="Submit">Submit</a>
+					</p></div>
+	</div>
+					
+					</td></tr>
+					<tr><td>
+					
+					</td><td>
+					
+					</td>
+					</tr>
+					
+					
+					</table>
+
+	</div>
+					
+					</td></tr>
+					<tr><td>
+					
+					</td><td>
+					
+					</td>
+					</tr>
+					
+					
+					</table>
+						
+						
+						
+						
+					    
+				
+  
+					</div>
+					
+
+					</div>
+                
+                </div>
+              <div class="shadow_main"></div>
+			
+
+			</div>
+
+		
+		<div id="modal" style=" background-color:none; padding:25px; font-size:150%; display:none;">
+	 <table style="border:3px solid black;" width="31%" cellspacing="0" cellpadding="0" >
+        <tbody ><tr>
+          <td class="header"><div style="float: left;width:96%;"> ADD APPLIANCE INFORMATION  </div><div> <a id="TB_closeWindowButton" style="color: #ffffff;text-decoration: none;" href="#" onClick="Popup.hide('modal')">X</a></div></td> 
+        </tr>
+
+        <tr>
+          <td class="home_box">
+             <iframe src="add_sensor_profile.jsp" id="myframe" width="430px" height="140px"></iframe>           
+          </td>
+        </tr>
+      </tbody></table>
+</div>
+<div id="modal2" style=" background-color:none; padding:25px; font-size:150%; display:none;">
+	 <table style="border:3px solid black;" width="31%" cellspacing="0" cellpadding="0" >
+        <tbody ><tr>
+          <td class="header"><div style="float: left;width:96%;"> EDIT ZONE INFORMATION  </div><div> <a id="TB_closeWindowButton" style="color: #ffffff;text-decoration: none;" href="#" onClick="Popup.hide('modal2')">X</a></div></td> 
+        </tr>
+
+        <tr>
+          <td class="home_box">
+             <iframe src="edit_machine_profile.jsp?machine_id=<%out.print(request.getParameter( "mid" ));%>" width="350px" height="185px"></iframe>           
+          </td>
+        </tr>
+      </tbody></table>
+</div>
+
+<div id="modal3" style=" background-color:none; padding:25px; font-size:150%; display:none;">
+	 <table style="border:3px solid black;" width="31%" cellspacing="0" cellpadding="0" >
+        <tbody ><tr>
+          <td class="header"><div style="float: left;width:96%;"> EDIT APPLIANCE INFORMATION  </div><div> <a id="TB_closeWindowButton" style="color: #ffffff;text-decoration: none;" href="#" onClick="Popup.hide('modal3')">X</a></div></td> 
+        </tr>
+
+        <tr>
+          <td class="home_box">
+             <iframe id="edit_sensor_frame" src="" id="myframe" width="430px" height="140px"></iframe>           
+          </td>
+        </tr>
+      </tbody></table>
+</div>
+
+
+			
+                               	
+							  </div> 
+							</div>
+							<div class="clear">  
+						    </div>
+					  </div> 
+					</div> 
+				</div> 
+			</div><br />
+	</div>
+ <table width="100%" background="images/footer.png" height="54px">
+ <tr>
+ <td align="center"><strong><p>Copyright 2010 Wifinity</p></strong></td>
+ </tr>
+ </table>
+ <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20912403-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body> 
+</html>

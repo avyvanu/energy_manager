@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+	<meta name="author" content="" />
+     <link type="text/css" rel="stylesheet" href="contentstyle.css"/>
+	 <link type="text/css" rel="stylesheet" href="css/subpage.css"/>
+   <script type="text/javascript" src="popup.js"></script>
+   
+    
+     <!-- css for Datepicker -->
+	 
+<!-- jQuery for Datepicker -->
+    
+
+    <script type="text/javascript" src="content.js"></script>
+	
+	
+		
+ <style type="text/css">
+#Login {
+border:0px solid #DFA641;
+color:#8A9AA6;
+float:left;
+height:210px;
+position:relative;
+width:335px;
+}
+
+label  {
+color:#4A7195;
+font-weight:bold;
+}
+
+
+
+
+</style>	 
+<script language="javascript">
+	function displaypolicy(obj) {
+	
+txt = obj.options[obj.selectedIndex].value;
+//alert(txt);
+//document.getElementById("approve").style.display = '';
+//document.getElementById("edit").style.display = '';
+if (txt !='') {
+document.getElementById("gender").disabled=true ;
+} }</script>
+  <!--[if gte IE 5]>
+<style type="text/css">
+
+.white {
+background:repeat-x scroll left bottom #FFFFFF;
+filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/grey-up.png' ,sizingMethod='scale');
+}
+.white2 {
+background:repeat-x scroll left bottom #CDD6DD;
+filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/grey-up.png' ,sizingMethod='scale');
+}
+</style>
+<![endif]-->	
+	
+</head>
+<body>
+
+<div id="centercolumn">
+
+<div id="revisedcontainer">
+
+<form action="" name=xx method="post">
+  <div class="demo">
+
+<div id="tabs">
+	
+	<div id="tabs-1">
+	<fieldset>	
+		
+<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+<tr>
+    <td>
+    
+    <table width="100%" border="0" cellspacing="1" cellpadding="4">
+   	
+	
+	<tr>
+        
+        <td>
+Room Type<span><font color="red">*</font></span></td>
+        <td ><select  id="gender" onchange="displaypolicy(this);" >
+                                   <option id="op" value="">Select</option>
+                                   <option id="op" value="1">Living Room</option>
+								   <option id="op" value="2">Dining Room</option>
+								   <option id="op" value="3">Kitchen</option>
+								   <option id="op" value="4">Bed Room</option>
+								   <option id="op" value="5">Bath Room</option>
+								   <option id="op" value="6">Other</option>
+                                  </select></td>
+        
+    </tr>
+  
+   
+   
+    </table>
+    
+    </td>
+</tr>
+
+</table>
+ 
+    
+
+<div>
+    <span>&nbsp;</span>
+	</div>                    
+	 </fieldset>
+		</div>
+
+	<div id="tabs-3">
+<div id="errormsg3" align="center" style="display:none;" ><font color="red">Please Enter Mandatory Fields in all Tabs!</font></div>
+  	 
+<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+<tr>
+    <td class="gridtd">
+      <table id="table1" width="100%" border="0" cellspacing="1" cellpadding="4">
+    <tr>
+        <td class="white2" style="width:25px;"><b>Select</b></td>
+		<td class="white2"><b>Appliance</b></td>
+		<td class="white2" id="nomi"  ><b>Units</b></td>
+        
+    </tr>
+   
+    
+     <tr id="row1" style="display:none;"><td ></td>
+		<td ></td>
+		<td ></td>
+		
+		</tr>
+    
+
+    </table>
+    
+    </td>
+</tr>
+<tr>
+  <!-- <input type="button" value="" onclick="javascript:parent.content.Popup.showModal('modal2',null,null,{'screenColor':'#000000','screenOpacity':.6});return false;" id="lnkForgot"
+ class="add_buttons" /> -->
+  <td align="right" colspan="2" class="form2"> <input type="button" value="" onclick="javascript:window.open('nominee.htm','mywindow','width=700px,height=280px,left=350,top=200,screenX=0,screenY=100');return false;" id="lnkForgot"
+ class="add_buttons" />&nbsp;&nbsp;&nbsp;<input type="button" value="" class="del_buttons" onclick="getCheckedRadios();return false;"  />
+</td><td></td>
+  </tr>
+</table>
+<div align="center">	 <input id="submit" type="submit"   value="" class="submit_buttons" /></div>
+	</div>
+</div>
+
+</div>
+           
+  
+ 		
+
+  </form>
+</div>
+
+
+
+</div>
+
+
+<div id="modal" style=" background-color:none; padding:25px; font-size:150%; display:none;">
+	 <table style="border:3px solid black;" width="31%" cellspacing="0" cellpadding="0" >
+        <tbody ><tr>
+          <td class="header"><div style="float: left;width:96%;"> Reason Detail</div><div> <a id="TB_closeWindowButton" style="color: #ffffff;text-decoration: none;" href="#" onClick="Popup.hide('modal'),parent.menu.Popup.hide('modal'),parent.topNav.Popup.hide('modal'),parent.footer.Popup.hide('modal');">X</a></div></td> 
+        </tr>
+        <tr>
+          <td class="home_box">
+                        <fieldset class="InfoBox" id="Login">
+                               <form>
+                <div id="LoginInput">
+				 
+                	<label for="username">Reason</label>
+	              <textarea cols="50" style="width:330px;height:100px;" rows="5"></textarea>
+                                                          
+                 <br /><br />        
+                    
+                 <div style="text-align: center;">
+	                   <!--<input type="button" value="Submit"  onclick='turnoff()' class="topformbutton" />-->
+                      <input id="submit" type="button" onClick="Popup.hide('modal'),parent.menu.Popup.hide('modal'),parent.topNav.Popup.hide('modal'),parent.footer.Popup.hide('modal');" value="" class="submit_buttons" />
+	                </div>
+
+                </div>
+                </form>
+            </fieldset>
+          </td>
+        </tr>
+      </tbody></table>
+</div>
+<div id="modal2" style=" background-color:none; padding:25px; font-size:150%; display:none;font-size: 150%; position: absolute; left: 0px; z-index: 103; top: 0px; padding: 25px;">
+	  <table style="border:3px solid black;" width="31%" cellspacing="0" cellpadding="0" >
+        <tbody ><tr>
+          <td class="header"><div style="float: left;width:96%;">Room Appliances Information</div><div> <a id="TB_closeWindowButton" style="color: #ffffff;text-decoration: none;" href="#" onClick="Popup.hide('modal2'),parent.menu.Popup.hide('modal'),parent.topNav.Popup.hide('modal'),parent.footer.Popup.hide('modal');">X</a></div></td> 
+        </tr>
+        <tr>
+          <td class="home_box2">
+                <IFRAME SRC="nominee.htm"  width="700px" height="280px"></IFRAME>
+       </td>
+        </tr>
+      </tbody></table>        
+</div>
+</body>
+</html>

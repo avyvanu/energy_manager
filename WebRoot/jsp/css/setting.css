@@ -1,0 +1,204 @@
+/* CSS Document */
+
+.white2 {
+    background: url("../images2/alert-overlay.png") repeat-x scroll left bottom #025FB4;
+    color: #FFFFFF;
+    height: 20px;
+    text-align: center;
+}
+.white {
+	background:url("../images2/grey-up.png") repeat-x scroll left bottom #FFFFFF;
+	 height: 20px;
+	/*  color: #006CA3; */
+	 color:#333333 ; 
+	 max-width : 40px;
+	 padding-left:3px;
+}
+.gridtd {
+    background: none repeat scroll 0 0 #8eb040;
+}
+.reply a {
+background-color:#5B9510;
+}
+
+a:link, a:visited {
+color:#3F7401;
+}
+
+.reply a {
+-moz-border-radius:5px 5px 5px 5px;
+border-color:rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.35);
+border-style:solid;
+border-width:1px;
+text-shadow:1px 1px 1px rgba(0, 0, 0, 0.8);
+}
+
+.reply a {
+min-width:50px;
+}
+
+.reply a {
+font-size:10px;
+padding:0 6px 1px;
+text-transform:uppercase;
+}
+
+.reply a {
+background-color:#025FB4;
+padding:8px 16px;
+}
+
+.reply a {
+background:url("../images2/alert-overlay.png") repeat scroll 0 0 #5B9510;
+border:medium none;
+color:#FFFFFF !important;
+cursor:pointer;
+display:inline-block;
+padding:5px 10px 6px;
+position:relative;
+text-decoration:none;
+}
+
+a:link, a:visited {
+color:#066CCA;
+text-decoration:none;
+}
+.reply a { -moz-border-radius: 5px; -webkit-border-radius: 5px; -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.25); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8); border: 1px solid rgba(0,0,0,.25); border-bottom-color: rgba(0,0,0,.35); }
+.reply a:hover { opacity:0.9; }
+
+.select {
+position:relative;
+width:234px;
+}
+select {
+border:1px solid #CCCCCC;
+color:#666666;
+font:12px Arial,Helvetica,sans-serif;
+padding:3px;
+width:234px;
+}
+td.header {
+    background-image: url("../images2/bg.jpg");
+    background-repeat: repeat-x;
+    border: 1px solid #003D69;
+    color: #FFFFFF;
+    font-weight: bold;
+    padding: 4px 5px 5px 6px;
+}
+.add_buttons {
+    background-image: url("../images2/add.png");
+    background-repeat: no-repeat;
+    border: medium none;
+    color: #0A4687;
+    cursor: pointer;
+    font: 11px Verdana,Arial,Helvetica,sans-serif;
+    height: 20px;
+    text-align: center;
+    width: 50px;
+}
+div, td {
+    font-family: tahoma,"Trebuchet MS",arial,serif;
+    font-size: 12px;
+    line-height: 140%;
+}
+.addsensor_buttons {
+    background-image: url("../images2/add_sensor.png");
+    background-repeat: no-repeat;
+    border: medium none;
+    color: #0A4687;
+    cursor: pointer;
+    font: 11px Verdana,Arial,Helvetica,sans-serif;
+    height: 20px;
+    text-align: center;
+    width: 60px;
+}
+td.form2 {
+    padding: 10px 0 5px 10px;
+}
+.del_buttons {
+    background-image: url("../images2/delete.png");
+    background-repeat: no-repeat;
+    border: medium none;
+    color: #0A4687;
+    cursor: pointer;
+    font: 11px Verdana,Arial,Helvetica,sans-serif;
+    height: 20px;
+    text-align: center;
+    width: 50px;
+}
+.pageHead {
+    color: #666666;
+    font-size: 11px;
+    overflow: hidden;
+    padding: 0 0 10px;
+}
+.pageHead h1 {
+    color: #919191;
+    float: left;
+    font-size: 20px;
+    margin: 0;
+    padding: 10px;
+}
+.indent {
+    border: 1px solid #CCCCCC;
+    clear: both;
+    display: block;
+    overflow: hidden;
+   /* padding: 8px 7px; */
+     min-height: 375px;
+}
+.bread-crmb {
+    float: right;
+    margin: 8px 0 0;
+    padding: 0 0 0 15px;
+}
+.username {
+    color: #AA0000;
+}
+.bread-crmb li a {
+    color: #999999;
+    font-size: 11px;
+    font-weight: normal;
+    padding: 0 10px 0 0;
+    text-decoration: none;
+}
+
+.li_alink {
+    background: url("../images/bullet3.gif") no-repeat scroll right 4px transparent;
+    }
+    .bread-crmb li {
+    color: #666666;
+    float: left;
+    font-size: 11px;
+    font-weight: bold;
+    list-style: none outside none;
+    margin: 0 0 0 5px;
+    padding: 0;
+}
+.edit_buttons {
+    background-image: url("../images2/edit.png");
+    background-repeat: no-repeat;
+    border: medium none;
+    color: #0A4687;
+    cursor: pointer;
+    font: 11px Verdana,Arial,Helvetica,sans-serif;
+    height: 20px;
+    text-align: center;
+    width: 50px;
+}
+.text_box {
+    border: 1px solid #CCCCCC;
+    color: #666666;
+    font: 12px Arial,Helvetica,sans-serif;
+    padding: 3px;
+    width: 226px;
+}
+lft-twocollft ul li {
+    background: url("../images2/bullet4.gif") no-repeat scroll left 6px transparent;
+    color: #666666;
+    font-size: 12px;
+    line-height: 18px;
+    list-style: none outside none;
+    margin: 0 0 6px;
+    padding: 0 0 0 10px;
+}

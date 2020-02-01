@@ -1,0 +1,31 @@
+<html><head><title>TEST</title>
+<script type="text/javascript">
+function getChoices(form)
+{
+  var values, options, option, k=0;
+  values  = new Array();
+  options = form.choices.options;
+  while(option=options[k++])
+    if(option.selected)
+      values[values.length] = option.value;
+  form.output.value = values.join(' ');
+}
+</script>
+</head>
+<body>
+
+<form>
+<select name="choices"  onchange="getChoices(this.form)">
+<option value="1">one
+<option value="2">two
+<option value="3">three
+<option value="4">four
+<option value="5">five
+</select>
+<input type="button" value="select" onclick="">
+<input name="output" type="textbox">
+</form>
+
+</body>
+</html>
+
